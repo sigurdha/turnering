@@ -1,13 +1,12 @@
 
 // firebase-config.js
 const firebaseConfig = {
-  apiKey: "AIzaSyDemoKey-PLACEHOLDER",
-  authDomain: "nesodden-tennis.firebaseapp.com",
-  databaseURL: "https://nesodden-tennis-default-rtdb.firebaseio.com",
-  projectId: "nesodden-tennis",
-  storageBucket: "nesodden-tennis.appspot.com",
-  messagingSenderId: "1234567890",
-  appId: "1:1234567890:web:demo1234567890"
+  apiKey: "AIzaSyAtS2K6Q2SKmnmZTDQK7YEPzfKp41JDfCQ",
+  authDomain: "turnering-7ac64.firebaseapp.com",
+  projectId: "turnering-7ac64",
+  storageBucket: "turnering-7ac64.firebasestorage.app",
+  messagingSenderId: "942774569294",
+  appId: "1:942774569294:web:c3b648d93d52f6770ef61f"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
