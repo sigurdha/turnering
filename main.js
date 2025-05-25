@@ -1,6 +1,6 @@
 
+// main.js
 const app = document.getElementById('app');
-
 let players = [];
 let matches = [];
 
@@ -23,9 +23,10 @@ function render() {
     const name = document.getElementById('name').value.trim();
     const age = parseInt(document.getElementById('age').value.trim());
     if (name && age) {
-      players.push({ name, age });
-      matches = [];
-      render();
+      const newPlayerRef = db.ref('players').push();
+      newPlayerRef.set({ name, age });
+      document.getElementById('name').value = '';
+      document.getElementById('age').value = '';
     }
   };
 }
@@ -41,7 +42,7 @@ function generateMatches() {
       });
     }
   }
-  render();
+  db.ref('matches').set(matches);
 }
 
 function renderMatches() {
@@ -60,6 +61,24 @@ function renderMatches() {
 
 function updateResult(index, result) {
   matches[index].result = result;
+  db.ref('matches').set(matches);
 }
 
-render();
+function listenToData() {
+  db.ref('players').on('value', snapshot => {
+    players = [];
+    snapshot.forEach(child => {
+      players.push(child.val());
+    });
+    render();
+  });
+  db.ref('matches').on('value', snapshot => {
+    matches = [];
+    snapshot.forEach(child => {
+      matches.push(child.val());
+    });
+    render();
+  });
+}
+
+listenToData();
