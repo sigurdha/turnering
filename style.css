@@ -1,9 +1,40 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    background-color: #f0f8ff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background: #f2f7fc;
+  color: #333;
 }
 h1 {
-    color: #2e8b57;
+  text-align: center;
+  color: #2e6ca5;
+}
+form, .group-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+input, select, button {
+  margin: 0.3rem;
+  padding: 0.4rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+button {
+  background: #2e6ca5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #244f7d;
+}
+ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+.group-card {
+  border-left: 5px solid #2e6ca5;
 }
