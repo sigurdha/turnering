@@ -1,5 +1,5 @@
 
-// main.js – med navn, alder, kjønn, telefon, UTR + grupper og kamper
+// main.js – med visning av kjønn i grupper
 const app = document.getElementById('app');
 let players = [];
 let groups = [];
@@ -71,7 +71,7 @@ function renderGroups() {
       <div class="group-card">
         <h4>Gruppe ${String.fromCharCode(65 + i)}</h4>
         <ul>
-          ${group.map(p => `<li>${p.name} (UTR: ${p.utr})</li>`).join('')}
+          ${group.map(p => `<li>${p.name} (UTR: ${p.utr}) – ${p.gender}</li>`).join('')}
         </ul>
         ${renderGroupMatches(i)}
       </div>
