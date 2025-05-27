@@ -179,3 +179,4 @@ db.ref('players').on('value', snapshot => {
 }
 
 listenToData();
+window.autoDistributeGroups = autoDistributeGroups;
