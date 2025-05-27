@@ -1,11 +1,11 @@
 
-// main.js – korrigert versjon med riktig datahåndtering og én render()
 const app = document.getElementById('app');
 let players = [];
 let groups = [];
 let matches = [];
 
 function render() {
+  console.log("Rendering with players:", players);
   app.innerHTML = `
     <h2>Registrer spiller</h2>
     <form id="playerForm">
@@ -154,34 +154,23 @@ function computeWinner(sets, p1, p2) {
 }
 
 function listenToData() {
-  let ready = { players: false, groups: false, matches: false };
-
+  let tempPlayers = [];
   db.ref('players').on('value', snapshot => {
-    players = [];
-    snapshot.forEach(child => players.push(child.val()));
-    ready.players = true;
-    maybeRender();
+    snapshot.forEach(child => tempPlayers.push(child.val()));
+    players = tempPlayers;
+    console.log("Hentet spillere:", players);
+    render();
   });
 
   db.ref('groups').on('value', snapshot => {
     groups = [];
     snapshot.forEach(child => groups.push(child.val()));
-    ready.groups = true;
-    maybeRender();
   });
 
   db.ref('matches').on('value', snapshot => {
     matches = [];
     snapshot.forEach(child => matches.push(child.val()));
-    ready.matches = true;
-    maybeRender();
   });
-
-  function maybeRender() {
-    if (ready.players && ready.groups && ready.matches) {
-      render();
-    }
-  }
 }
 
 listenToData();
