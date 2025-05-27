@@ -156,7 +156,9 @@ function computeWinner(sets, p1, p2) {
 function listenToData() {
   db.ref('players').on('value', snapshot => {
     players = [];
-    snapshot.forEach(child => players.push(child.val()));
+    let temp = [];
+    snapshot.forEach(child => temp.push(child.val()));
+    players = temp;
     render();
   });
   db.ref('groups').on('value', snapshot => {
