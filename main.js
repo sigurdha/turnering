@@ -154,23 +154,33 @@ function computeWinner(sets, p1, p2) {
 }
 
 function listenToData() {
+  let ready = { players: false, groups: false, matches: false };
+
   db.ref('players').on('value', snapshot => {
     players = [];
-    let temp = [];
-    snapshot.forEach(child => temp.push(child.val()));
-    players = temp;
-    render();
+    snapshot.forEach(child => players.push(child.val()));
+    ready.players = true;
+    maybeRender();
   });
+
   db.ref('groups').on('value', snapshot => {
     groups = [];
     snapshot.forEach(child => groups.push(child.val()));
-    render();
+    ready.groups = true;
+    maybeRender();
   });
+
   db.ref('matches').on('value', snapshot => {
     matches = [];
     snapshot.forEach(child => matches.push(child.val()));
-    render();
+    ready.matches = true;
+    maybeRender();
   });
-}
 
-listenToData();
+  function maybeRender() {
+    if (ready.players && ready.groups && ready.matches) {
+      render();
+    }
+  }
+}
+;
