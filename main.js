@@ -1,5 +1,5 @@
 
-// main.js – komplett med spillere, grupper, kamper og Firebase-lytting
+// main.js – korrigert versjon med riktig datahåndtering og én render()
 const app = document.getElementById('app');
 let players = [];
 let groups = [];
@@ -41,7 +41,7 @@ function render() {
     const phone = document.getElementById('phone').value.trim();
     const utr = parseFloat(document.getElementById('utr').value.trim());
     if (name && age && gender && phone && utr >= 0) {
-      const newRef = db.ref('players').push();  // Ensures unique key
+      const newRef = db.ref('players').push();
       newRef.set({ name, age, gender, phone, utr });
       e.target.reset();
     }
@@ -183,4 +183,5 @@ function listenToData() {
     }
   }
 }
-;
+
+listenToData();
