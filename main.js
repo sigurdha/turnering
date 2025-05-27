@@ -155,12 +155,17 @@ function computeWinner(sets, p1, p2) {
 
 function listenToData() {
   let tempPlayers = [];
-  db.ref('players').on('value', snapshot => {
-    snapshot.forEach(child => tempPlayers.push(child.val()));
-    players = tempPlayers;
-    console.log("Hentet spillere:", players);
-    render();
+db.ref('players').on('value', snapshot => {
+  console.log("RAW snapshot:", snapshot.val()); // ny linje!
+  let tempPlayers = [];
+  snapshot.forEach(child => {
+    console.log("Spiller funnet:", child.val()); // ny linje!
+    tempPlayers.push(child.val());
   });
+  players = tempPlayers;
+  console.log("Hentet spillere:", players);
+  render();
+});
 
   db.ref('groups').on('value', snapshot => {
     groups = [];
